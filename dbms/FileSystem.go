@@ -2,7 +2,6 @@ package dbms
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"os"
 	"strings"
 )
@@ -20,7 +19,7 @@ func SaveFileToDB(dataFile string, structFile string, structure string) error {
 	}
 
 	// Загрузка существующих данных из JSON файла, если он существует.
-	fileData, err := ioutil.ReadFile(dataFileName)
+	fileData, err := os.ReadFile(dataFileName)
 	var fileInfos []FileInfo
 
 	if err == nil {
@@ -65,7 +64,7 @@ func SaveFileToDB(dataFile string, structFile string, structure string) error {
 	}
 
 	// Сохранение JSON-данных в файл, перезаписывая существующий файл.
-	err = ioutil.WriteFile(dataFileName, jsonData, 0644)
+	err = os.WriteFile(dataFileName, jsonData, 0644)
 	if err != nil {
 		return err
 	}
