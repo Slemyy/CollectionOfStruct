@@ -1,7 +1,7 @@
 package main
 
 import (
-	"CollectionOfStruct/dbms"
+	"CollectionOfStruct/handlers"
 	"flag"
 	"fmt"
 )
@@ -29,7 +29,7 @@ func main() {
 	}
 
 	// Вызов функции, которая обрабатывает запрос к базе
-	err := dbms.HandleQuery(file, query)
+	err := handlers.HandleQuery(file, query)
 	if err != nil {
 		fmt.Println("Error:", err)
 	}
