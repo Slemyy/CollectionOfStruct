@@ -6,3 +6,8 @@ type Node struct {
 }
 
 const arraySize = 769 // 769
+
+type HashNode struct {
+	key   string
+	value string
+}
