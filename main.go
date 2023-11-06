@@ -29,8 +29,12 @@ func main() {
 	}
 
 	// Вызов функции, которая обрабатывает запрос к базе
-	err := handlers.HandleQuery(file, query)
+	request, err := handlers.HandleQuery(file, query)
 	if err != nil {
 		fmt.Println("Error:", err)
+	}
+
+	if request != "" {
+		fmt.Println(request)
 	}
 }

@@ -58,7 +58,8 @@ func SaveFileToDB(dataFile string, structFile string, structure string) error {
 	}
 
 	// Сериализация обновленных данных в JSON.
-	jsonData, err := json.Marshal(fileInfos)
+	//jsonData, err := json.Marshal(fileInfos)
+	jsonData, err := json.MarshalIndent(fileInfos, "", "  ") // Добавляем отступы с двумя пробелами
 	if err != nil {
 		return err
 	}
