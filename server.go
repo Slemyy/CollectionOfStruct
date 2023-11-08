@@ -5,6 +5,7 @@ import (
 	"log"
 	"net"
 	"strings"
+	"sync"
 )
 
 func main() {
@@ -24,12 +25,13 @@ func main() {
 			return
 		}
 
-		go handleClient(conn)
+		var mut sync.Mutex
+		go handleClient(conn, &mut)
 	}
 
 }
 
-func handleClient(conn net.Conn) {
+func handleClient(conn net.Conn, mut *sync.Mutex) {
 	defer conn.Close()
 	remoteAddr := conn.RemoteAddr() // Получение адреса удаленного узла
 
@@ -96,7 +98,7 @@ func handleClient(conn net.Conn) {
 			query = query[:len(query)-1]
 		}
 
-		ans, err := handlers.HandleQuery(args[1], query)
+		ans, err := handlers.HandleQuery(args[1], query, mut)
 		if err != nil {
 			log.Printf("(%s) Error: %v\n", remoteAddr, err)
 

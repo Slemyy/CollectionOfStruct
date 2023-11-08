@@ -7,9 +7,8 @@ import (
 	"sync"
 )
 
-func HandleQuery(file string, query string) (string, error) {
+func HandleQuery(file string, query string, mut *sync.Mutex) (string, error) {
 	request := strings.Fields(query)
-	var mut sync.Mutex
 
 	mut.Lock()
 	defer mut.Unlock()
